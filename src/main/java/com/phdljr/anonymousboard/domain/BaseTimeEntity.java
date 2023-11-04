@@ -17,5 +17,5 @@ public abstract class BaseTimeEntity {
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
-    private LocalDateTime createdBy;
+    private LocalDateTime createdAt;
 }
