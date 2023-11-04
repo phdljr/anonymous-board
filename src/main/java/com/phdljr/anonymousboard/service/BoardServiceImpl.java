@@ -3,8 +3,8 @@ package com.phdljr.anonymousboard.service;
 import com.phdljr.anonymousboard.controller.dto.request.BoardRequestDto;
 import com.phdljr.anonymousboard.controller.dto.response.BoardResponseDto;
 import com.phdljr.anonymousboard.domain.Board;
-import com.phdljr.anonymousboard.exception.NotFoundBoardException;
-import com.phdljr.anonymousboard.exception.WrongPasswordException;
+import com.phdljr.anonymousboard.exception.type.NotFoundBoardException;
+import com.phdljr.anonymousboard.exception.type.WrongPasswordException;
 import com.phdljr.anonymousboard.repository.BoardRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository boardRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<BoardResponseDto> getBoards() {
         return boardRepository.findAll()
             .stream()
@@ -27,6 +27,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BoardResponseDto getBoard(final Long boardId) {
         return findById(boardId).toResponseDto();
     }
