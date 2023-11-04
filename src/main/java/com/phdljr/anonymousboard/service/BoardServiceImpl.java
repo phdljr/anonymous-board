@@ -3,6 +3,8 @@ package com.phdljr.anonymousboard.service;
 import com.phdljr.anonymousboard.controller.dto.request.BoardRequestDto;
 import com.phdljr.anonymousboard.controller.dto.response.BoardResponseDto;
 import com.phdljr.anonymousboard.domain.Board;
+import com.phdljr.anonymousboard.exception.NotFoundBoardException;
+import com.phdljr.anonymousboard.exception.WrongPasswordException;
 import com.phdljr.anonymousboard.repository.BoardRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -68,12 +70,12 @@ public class BoardServiceImpl implements BoardService {
 
     private void confirm(final Board board, final String password) {
         if (!board.confirmPassword(password)) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new WrongPasswordException();
         }
     }
 
     private Board findById(final Long boardId) {
         return boardRepository.findById(boardId)
-            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+            .orElseThrow(NotFoundBoardException::new);
     }
 }
