@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class BoardRequestDto {
+
     private String title;
     private String password;
     private String createdBy;

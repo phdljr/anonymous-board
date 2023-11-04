@@ -40,7 +40,7 @@ public class Board extends BaseTimeEntity {
         this.contents = contents;
     }
 
-    public boolean confirmPassword(String password){
+    public boolean confirmPassword(String password) {
         return this.password.equals(password);
     }
 
